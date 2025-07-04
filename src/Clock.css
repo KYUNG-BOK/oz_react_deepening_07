@@ -1,0 +1,26 @@
+.timer-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.timer-time {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.timer-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.timer-button.running {
+    background-color: #f44336; /* 정지 */
+}
+
+.timer-button.paused {
+    background-color: #4CAF50; /* 시작 */
+}

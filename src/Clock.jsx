@@ -1,15 +1,42 @@
-/**
- * Clock 컴포넌트
- *
- * 실시간 시계를 표시하고 사용자가 시계를 시작하거나 정지할 수 있는 React 함수형 컴포넌트입니다.
- * 시간은 "시", "분", "초"로 나뉘어 표시됩니다.
- *
- * 주요 기능:
- * - 현재 시간을 "HH:mm:ss" 형식으로 표시합니다.
- * - 시계가 실행 중일 때 매초마다 시간을 업데이트합니다.
- **/
+import { useEffect, useState, useRef } from "react"; // useRef는 예상치못한 변수들을 방지하기 위해 추가했습니다.
+import './Clock.css';
+
 function Clock() {
-  return <div className="timer-container"></div>;
+  const [time, setTime] = useState(new Date());
+  const [timerRunning, setTimerRunning] = useState(true);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (timerRunning) {
+      clearInterval(intervalRef.current);
+
+      intervalRef.current = setInterval(() => {
+        setTime(new Date());
+      }, 1000);
+    } else {
+      clearInterval(intervalRef.current);
+    }
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, [timerRunning]);
+
+  const handleTimerToggle = () => {
+    setTimerRunning((prev) => !prev);
+  };
+
+  return (
+    <div className="timer-container">
+      <h1 className="timer-time">{time.toLocaleTimeString("it-IT")}</h1>
+      <button
+        className={`timer-button ${timerRunning ? 'running' : 'paused'}`}
+        onClick={handleTimerToggle}
+      >
+        {timerRunning ? "타이머 정지" : "타이머 시작"}
+      </button>
+    </div>
+  );
 }
 
 export default Clock;

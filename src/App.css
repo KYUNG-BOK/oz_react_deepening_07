@@ -4,3 +4,26 @@
   box-sizing: border-box;
   background-color: #333;
 }
+
+.container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.component-toggle-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.component-toggle-btn.running {
+  background-color: #f44336; /* 정지 */
+}
+
+.component-toggle-btn.paused {
+  background-color: #4CAF50; /* 시작 */
+}
